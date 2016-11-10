@@ -4,7 +4,6 @@
 
 import React, {Component} from 'react';
 import autobind from 'react-autobind';
-import {connect} from 'remx/react';
 import './TopicsScreen.css';
 
 class TopicsScreen extends Component {
@@ -24,4 +23,4 @@ class TopicsScreen extends Component {
   }
 }
 
-export default connect(TopicsScreen);
+export default TopicsScreen;
