@@ -13,12 +13,8 @@ class TopicsScreen extends Component {
   }
 
   render() {
-    return this.renderLoading();
-  }
-
-  renderLoading() {
     return (
-      <p>Loading...</p>
+      <p>Hello, world!</p>
     );
   }
 }
