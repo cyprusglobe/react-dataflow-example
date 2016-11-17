@@ -8,7 +8,7 @@ const state = remx.state({
 
 export const mutators = remx.setters({
   saveTopics(topicsArray) {
-    state.allTopics = _.keyBy(topicsArray, (t) => t.id);
+    state.allTopics = _.keyBy(topicsArray, (t) => t.url);
     state.loading = false;
   }
 });

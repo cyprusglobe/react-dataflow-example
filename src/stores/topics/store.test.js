@@ -1,6 +1,6 @@
 describe('topics store', () => {
   let uut;
-  const fetchedTopics = [{id: 'a', title: 'hello'}, {id: 'b', title: 'world!'}];
+  const fetchedTopics = [{url: 'a', title: 'hello'}, {url: 'b', title: 'world!'}];
 
   beforeEach(() => {
     uut = require('./store');
@@ -13,7 +13,7 @@ describe('topics store', () => {
 
   it('holds topics', () => {
     uut.mutators.saveTopics(fetchedTopics);
-    expect(uut.selectors.getAllTopics()).toEqual({a: {id: 'a', title: 'hello'}, b: {id: 'b', title: 'world!'}});
+    expect(uut.selectors.getAllTopics()).toEqual({a: {url: 'a', title: 'hello'}, b: {url: 'b', title: 'world!'}});
   });
 
   it('sets loading false when topics fetched', () => {
