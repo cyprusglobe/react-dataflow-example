@@ -6,17 +6,42 @@ import React, {Component} from 'react';
 import autobind from 'react-autobind';
 import './TopicsScreen.css';
 
+import {connect} from 'remx/react';
+
+import {selectors as topicsSelectors} from '../stores/topics/store';
+import * as storeActions from '../stores/topics/actions';
+
 class TopicsScreen extends Component {
   constructor(props) {
     super(props);
     autobind(this);
   }
 
+  componentDidMount() {
+    storeActions.fetchTopics();
+  }
+
   render() {
+    if (topicsSelectors.isLoading()) {
+      return this.renderLoading();
+    } else {
+      return this.renderTopics();
+    }
+  }
+
+  renderLoading() {
     return (
-      <p>Hello, world!</p>
+      <p>Loading...</p>
+    );
+  }
+
+  renderTopics() {
+    return (
+      <div className="TopicsScreen">
+        <h3>Choose 3 topics of interest</h3>
+      </div>
     );
   }
 }
 
-export default TopicsScreen;
+export default connect(TopicsScreen);

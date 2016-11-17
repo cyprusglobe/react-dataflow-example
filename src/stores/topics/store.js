@@ -1,23 +1,24 @@
 import _ from 'lodash';
+import * as remx from 'remx';
 
-const store = {
+const state = remx.state({
   allTopics: {},
   loading: true
-};
+});
 
-export const mutators = {
+export const mutators = remx.setters({
   saveTopics(topicsArray) {
-    store.allTopics = _.keyBy(topicsArray, (t) => t.id);
-    store.loading = false;
+    state.allTopics = _.keyBy(topicsArray, (t) => t.id);
+    state.loading = false;
   }
-};
+});
 
-export const selectors = {
+export const selectors = remx.getters({
   getAllTopics() {
-    return store.allTopics;
+    return state.allTopics;
   },
 
   isLoading() {
-    return store.loading;
+    return state.loading;
   }
-};
+});
