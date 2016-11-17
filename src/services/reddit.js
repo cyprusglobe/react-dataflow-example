@@ -6,8 +6,7 @@ const DEFAULT_SUBREDDITS = `${REDDIT_ENDPOINT}/subreddits/default.json`;
 
 export async function getDefaultSubreddits() {
   const children = await getDefaultSubredditsOrThrow();
-  const sortedBySubscribers = orderBySubscribers(children);
-  return parseChildren(sortedBySubscribers);
+  return parseChildren(children);
 }
 
 async function getDefaultSubredditsOrThrow() {
@@ -19,17 +18,14 @@ async function getDefaultSubredditsOrThrow() {
   return children;
 }
 
-function orderBySubscribers(children) {
-  return _.orderBy(children, 'data.subscribers', 'desc');
-}
-
 // abstract away the specifics of the reddit API response and take only the fields we care about
 function parseChildren(sortedBySubscribers) {
   return _.map(sortedBySubscribers, (subreddit) => {
     return {
       title: _.get(subreddit, 'data.display_name'),
       description: _.get(subreddit, 'data.public_description'),
-      url: _.get(subreddit, 'data.url')
+      url: _.get(subreddit, 'data.url'),
+      subscribers: _.get(subreddit, 'data.subscribers')
     };
   });
 }

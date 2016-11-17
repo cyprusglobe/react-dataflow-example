@@ -15,11 +15,11 @@ describe('reddit service', () => {
   });
 
   it('fetched default subreddits', async() => {
-    const child1 = {data: {display_name: 'child1', url: 'url1', public_description: 'desc1'}};
-    const child2 = {data: {display_name: 'child2', url: 'url2', public_description: 'desc2'}};
+    const child1 = {data: {display_name: 'child1', url: 'url1', public_description: 'desc1', subscribers: 20}};
+    const child2 = {data: {display_name: 'child2', url: 'url2', public_description: 'desc2', subscribers: 10}};
 
-    const result1 = {title: 'child1', url: 'url1', description: 'desc1'};
-    const result2 = {title: 'child2', url: 'url2', description: 'desc2'};
+    const result1 = {title: 'child1', url: 'url1', description: 'desc1', subscribers: 20};
+    const result2 = {title: 'child2', url: 'url2', description: 'desc2', subscribers: 10};
 
     const data = {data: {children: [child1, child2]}};
     httpGet.mockReturnValue(Promise.resolve(data));
