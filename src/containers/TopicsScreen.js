@@ -5,6 +5,8 @@
 import React, {Component} from 'react';
 import autobind from 'react-autobind';
 import './TopicsScreen.css';
+import ListView from '../components/ListView';
+import ListRow from '../components/ListRow';
 
 import {connect} from 'remx/react';
 
@@ -36,10 +38,29 @@ class TopicsScreen extends Component {
   }
 
   renderTopics() {
+    const {rowsById, rowsIdArray} = topicsSelectors.getAllTopicsListStructure();
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
+        <ListView
+          rowsIdArray={rowsIdArray}
+          rowsById={rowsById}
+          renderRow={this.renderRow}
+        />
       </div>
+    );
+  }
+
+  renderRow(topicUrl, topic) {
+    return (
+      <ListRow
+        rowId={topicUrl}
+        onClick={this.onRowClick}
+        selected={false}
+      >
+        <h3>{topic.title}</h3>
+        <p>{topic.description}</p>
+      </ListRow>
     );
   }
 }

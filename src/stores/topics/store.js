@@ -20,5 +20,9 @@ export const selectors = remx.getters({
 
   isLoading() {
     return state.loading;
+  },
+
+  getAllTopicsListStructure() {
+    return {rowsById: state.allTopics, rowsIdArray: _.keys(state.allTopics)};
   }
 });
