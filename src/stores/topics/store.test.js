@@ -33,4 +33,16 @@ describe('topics store', () => {
     uut.mutators.saveTopics(fetchedTopics);
     expect(uut.selectors.getAllTopicsListStructure()).toEqual({rowsById: resultingTopics, rowsIdArray: ['a', 'b']});
   });
+
+  it('is topic selected', () => {
+    expect(uut.selectors.isTopicSelected('a')).toEqual(false);
+    uut.mutators.toggleTopicSelectedUrl('a');
+    expect(uut.selectors.isTopicSelected('a')).toEqual(true);
+    uut.mutators.toggleTopicSelectedUrl('a');
+    expect(uut.selectors.isTopicSelected('a')).toEqual(false);
+    uut.mutators.toggleTopicSelectedUrl('a');
+    expect(uut.selectors.isTopicSelected('a')).toEqual(true);
+    uut.mutators.toggleTopicSelectedUrl('b');
+    expect(uut.selectors.isTopicSelected('a')).toEqual(true);
+  });
 });

@@ -33,5 +33,4 @@ export default class ListView extends Component {
       return this.props.renderRow(rowId, _.get(this.props.rowsById, rowId));
     }
   }
-
 }

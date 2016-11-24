@@ -5,15 +5,15 @@ beforeEach(() => {
 
 describe('topics actions', () => {
   let uut;
-  let redditService;
   let store;
+  let redditService;
 
   beforeEach(() => {
-    jest.mock('../../services/reddit');
     jest.mock('./store');
-    redditService = require('../../services/reddit');
+    jest.mock('../../services/reddit');
     store = require('./store');
     uut = require('./actions');
+    redditService = require('../../services/reddit');
   });
 
   it('fetchTopics gets default subreddits', () => {
@@ -34,5 +34,11 @@ describe('topics actions', () => {
     redditService.getDefaultSubreddits.mockReturnValue(Promise.resolve([child1, child2]));
     await uut.fetchTopics();
     expect(store.mutators.saveTopics).toHaveBeenCalledWith([child2, child1]);
+  });
+
+  it('onTopicClicked', async() => {
+    await uut.onTopicClicked('url 1');
+    expect(store.mutators.toggleTopicSelectedUrl).toHaveBeenCalledTimes(1);
+    expect(store.mutators.toggleTopicSelectedUrl).toHaveBeenCalledWith('url 1');
   });
 });

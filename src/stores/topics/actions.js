@@ -7,3 +7,7 @@ export async function fetchTopics() {
   const sorted = _.orderBy(topics, (t) => t.subscribers, 'desc');
   store.mutators.saveTopics(sorted);
 }
+
+export async function onTopicClicked(topicUrl) {
+  store.mutators.toggleTopicSelectedUrl(topicUrl);
+}

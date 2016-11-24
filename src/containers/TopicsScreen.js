@@ -13,6 +13,8 @@ import {connect} from 'remx/react';
 import {selectors as topicsSelectors} from '../stores/topics/store';
 import * as storeActions from '../stores/topics/actions';
 
+const ConnectedListView = connect(ListView);
+
 class TopicsScreen extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +44,7 @@ class TopicsScreen extends Component {
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
-        <ListView
+        <ConnectedListView
           rowsIdArray={rowsIdArray}
           rowsById={rowsById}
           renderRow={this.renderRow}
@@ -52,16 +54,21 @@ class TopicsScreen extends Component {
   }
 
   renderRow(topicUrl, topic) {
+    const isSelected = topicsSelectors.isTopicSelected(topicUrl);
     return (
       <ListRow
         rowId={topicUrl}
         onClick={this.onRowClick}
-        selected={false}
+        selected={isSelected}
       >
         <h3>{topic.title}</h3>
         <p>{topic.description}</p>
       </ListRow>
     );
+  }
+
+  onRowClick(rowId) {
+    storeActions.onTopicClicked(rowId);
   }
 }
 
