@@ -12,7 +12,8 @@ describe('http service', () => {
     global.fetch = undefined;
   });
 
-  it('get performs fetch', () => {
-    //
+  it('get performs fetch', async() => {
+    //const result = await uut.get('my url');
+    //expect(result).toEqual();
   });
 });
